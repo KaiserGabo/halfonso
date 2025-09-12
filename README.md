@@ -1,15 +1,15 @@
 ## License
 
 This project is licensed under MIT License.
-For previous licensing history, see [LICENSE.previous.md](https://github.com/YJ0528/minibot/blob/main/LICENSE.previous.md)
+For previous licensing history, see [LICENSE.previous.md](https://github.com/KaiserGabo/halfonso/blob/main/LICENSE.previous.md)
 
 <br>
 
 <div align="center">
-	<img src="https://github.com/YJ0528/minibot/blob/main/visual_demos/robot_visual.jpg" height="350">
+	<img src="https://github.com/KaiserGabo/halfonso/blob/main/visual_demos/robot_visual.png" height="350">
 	<br>
 	<h2> Differential Drive Robot using ROS 2 Jazzy Jalisco </h2>
-	<a href="https://github.com/YJ0528/minibot/blob/main/LICENSE">
+	<a href="https://github.com/KaiserGabo/halfonso/blob/main/LICENSE">
 		<img src="https://img.shields.io/static/v1.svg?label=License&message=MIT&color=blue&style=flat-square" height="20">
   	</a>
 	<a href="https://ubuntu.com/tutorials/install-ubuntu-desktop#1-overview">
@@ -28,7 +28,7 @@ This project also represents my learning journey following tutorials from [Artic
 - Forum: https://articulatedrobotics.xyz/tutorials/mobile-robot/project-overview/
 - Tutorial playlist: https://youtube.com/playlist?list=PLunhqkrRNRhYAffV8JDiFOatQXuU-NnxT&si=1N9GNN6gRnet5heK
 
-You can see the demo [here](https://github.com/YJ0528/minibot/blob/main/README.md#demo)
+You can see the demo [here](https://github.com/KaiserGabo/halfonso/blob/main/README.md#demo)
 
 <br>
 
@@ -48,7 +48,7 @@ Make sure VScode is installed, it can be found in Ubuntu App Center. Some extens
 - YAML (Red Hat)
 - Remote - SSH (Microsoft)
 
-Additionally, consider to install [Terminator](https://github.com/YJ0528/minibot/blob/main/Tips_and_Troubleshooting.md#terminator), which is a useful tool to use with ROS 2.
+Additionally, consider to install [Terminator](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#terminator), which is a useful tool to use with ROS 2.
 
 <br>
 
@@ -111,20 +111,20 @@ Before we start, see [ROS 2 Packages: A Brief Introduction](https://https://gith
 
 Refer to:
 
-- [ros_gz_bridge](https://github.com/YJ0528/minibot/blob/main/Tips_and_Troubleshooting.md#ros_gz_bridge) if a topic could not be send or recived between ROS 2 and Gazebo.
-- [How a ROS 2 Topic Is Received By a Node](https://github.com/YJ0528/minibot/blob/main/Tips_and_Troubleshooting.md#how-a-ros-2-topic-is-received-by-a-node) if you suspect topics are not being published or subscribed to properly
-- [How to Check ROS 2 Node Parameter Name using Command Line](https://github.com/YJ0528/minibot/blob/main/Tips_and_Troubleshooting.md#how-to-check-ros-2-node-parameter-name-using-command-line) if you want to check if the parameters from `.yaml` file is loaded to the node properly.
+- [ros_gz_bridge](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#ros_gz_bridge) if a topic could not be send or recived between ROS 2 and Gazebo.
+- [How a ROS 2 Topic Is Received By a Node](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#how-a-ros-2-topic-is-received-by-a-node) if you suspect topics are not being published or subscribed to properly
+- [How to Check ROS 2 Node Parameter Name using Command Line](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#how-to-check-ros-2-node-parameter-name-using-command-line) if you want to check if the parameters from `.yaml` file is loaded to the node properly.
 
 <br>
 <br>
 
 <div align="center">
 	<h2> Setting Up the Robot </h2>
-	<img src="https://github.com/YJ0528/minibot/blob/main/visual_demos/robot_hardware.jpg" height="500">
+	<img src="https://github.com/KaiserGabo/halfonso/blob/main/visual_demos/robot_hardware.jpg" height="500">
 	<p>Robot Hardware and Circuit Connection Setup</p>
 </div>
 
-**\*<ins>IMPORTANT:</ins>** Please exercise the proper safety for lipo battery, I have included some precautions at [Lipo Battery Safety Precautions](https://github.com/YJ0528/minibot/blob/main/Tips_and_Troubleshooting.md#lipo-battery-safety-precautions).
+**\*<ins>IMPORTANT:</ins>** Please exercise the proper safety for lipo battery, I have included some precautions at [Lipo Battery Safety Precautions](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#lipo-battery-safety-precautions).
 
 ## Lisf of Hardwares:
 
@@ -138,7 +138,7 @@ Refer to:
 
 I only listed down the main electronics that I used, for more information, refer to [Build a Mobile Robot with ROS: Bill of Materials](https://articulatedrobotics.xyz/tutorials/mobile-robot/project-overview/#bill-of-materials) by [Articulated Robotics](https://articulatedrobotics.xyz/)
 
-see also: [Recommanded Components for Wiring and Robot Chasis (Optional)](https://github.com/YJ0528/minibot/blob/main/Tips_and_Troubleshooting.md#recommanded-components-for-wiring-and-robot-chasis-optional).
+see also: [Recommanded Components for Wiring and Robot Chasis (Optional)](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#recommanded-components-for-wiring-and-robot-chasis-optional).
 
 <br>
 
@@ -150,7 +150,7 @@ Make sure you are using [Ubuntu 24.04](https://ubuntu.com/tutorials/install-ubun
 
 - Make sure you have a Micro SD Card with at least 32GB, but a Micro SD with <ins>**64GB or more**</ins> is recommanded.
   - The system has occupied about 24GB of my SD Card, including all everything needed to run the robot.
-- If you never install Ubuntu 24.04 using rpi-imager before, see: [RPI5: Flash Ubuntu to SD Card](https://github.com/YJ0528/minibot/blob/main/Tips_and_Troubleshooting.md#rpi5-flash-ubuntu-to-sd-card).
+- If you never install Ubuntu 24.04 using rpi-imager before, see: [RPI5: Flash Ubuntu to SD Card](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#rpi5-flash-ubuntu-to-sd-card).
 
 **<ins>Install ROS 2 in Raspberry PI</ins>**
 
@@ -183,13 +183,13 @@ In addition, you need to Flash the driver code to your ESP32, see [Install and F
 
     - `/dev/ttyUSB0` for the lidar serial; located at [`./src/minibot/launch/robot.launch.py/declare_lidar_serial_port`](https://github.com/YJ0528/minibot/blob/aa18371856751b270af9280b53b87c7f5f3a6bcf/launch/robot.launch.py#L53).
     - `/dev/ttyUSB1` for the ESP32; located at [`./src/minibot/description/ros2_control.xacro/RobotSystem/device`](https://github.com/YJ0528/minibot/blob/aa18371856751b270af9280b53b87c7f5f3a6bcf/description/ros2_control.xacro#L11).
-    - To check or troubleshoot the USB connection in Raspberry Pi, see [RPI5: Add USB Access for Raspberry Pi](https://github.com/YJ0528/minibot/blob/main/Tips_and_Troubleshooting.md#rpi5-add-usb-access-for-raspberry-pi).
+    - To check or troubleshoot the USB connection in Raspberry Pi, see [RPI5: Add USB Access for Raspberry Pi](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#rpi5-add-usb-access-for-raspberry-pi).
 
 2.  Connects to the Raspberry Pi from your server machine using `openssh-server`. Open a terminal in the server machine, enter:
 
         ssh <remote_username>@<remote_ip_address>
 
-    - If you never install or use `openssh-server` before,see [SSH Access to Remote Machine- Connect Remote Machine via Terminal](https://github.com/YJ0528/minibot/blob/main/Tips_and_Troubleshooting.md#connecting-to-the-remote-machine-in-terminal).
+    - If you never install or use `openssh-server` before,see [SSH Access to Remote Machine- Connect Remote Machine via Terminal](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#connecting-to-the-remote-machine-in-terminal).
 
 3.  In order to let the nodes to be discoverable between the server and the remote machine, We need to set `ROS_DOMAIN_ID` to the same for both of the machine:
 
@@ -247,10 +247,10 @@ Some visual demostration:
 
 <div align="center">
 	<h3> SLAM with Joystick Teleoperation (5x speed with defualt parameter) </h3>
-	<img src="https://github.com/YJ0528/minibot/blob/main/visual_demos/SLAM_demostration-ezgif.com-video-to-gif-converter.gif" height="400">
+	<img src="https://github.com/KaiserGabo/halfonso/blob/main/visual_demos/SLAM_demostration-ezgif.com-video-to-gif-converter.gif" height="400">
 	<br><br>	
  	<h3> Nav2 Navigation using SLAM Toolbox Localization (5x speed)</h3>
-	<img src="https://github.com/YJ0528/minibot/blob/main/visual_demos/Nav2_demostration-ezgif.com-video-to-gif-converter.gif" height="400">	
+	<img src="https://github.com/KaiserGabo/halfonso/blob/main/visual_demos/Nav2_demostration-ezgif.com-video-to-gif-converter.gif" height="400">	
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`global_costmap/global_costmap/ros__parameters/inflation_layer/cost_scaling_factor`= 1.0
