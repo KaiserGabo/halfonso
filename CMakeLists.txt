@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(minibot)
+project(halfonso)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -17,6 +17,7 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(urdf_tutorial REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(geometry_msgs REQUIRED)
 # uncomment the following section in order to fill in
@@ -45,8 +46,9 @@ install(TARGETS
   DESTINATION lib/${PROJECT_NAME}
 )
 
+
 install(
-  DIRECTORY config description launch worlds demo_publisher_node maps visual_demos
+  DIRECTORY config description launch meshes worlds demo_publisher_node maps
   DESTINATION share/${PROJECT_NAME}
 )
 

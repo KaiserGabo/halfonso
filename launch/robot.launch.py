@@ -29,7 +29,7 @@ def image_transport_republisher(transport, camera_topics):
 
 def generate_launch_description():
 
-    package_name= 'minibot'
+    package_name= 'halfonso'
     package_dir= get_package_share_directory(package_name) 
 
     use_sim_time = LaunchConfiguration('use_sim_time')
@@ -48,11 +48,11 @@ def generate_launch_description():
         description='If true, use ros2_control'
     )
 
-    declare_lidar_serial_port = DeclareLaunchArgument(
-        'lidar_serial_port',
-        default_value='/dev/ttyUSB0',
-        description='Specifying usb port to connected lidar'
-    )
+    # declare_lidar_serial_port = DeclareLaunchArgument(
+    #     'lidar_serial_port',
+    #     default_value='/dev/ttyUSB1',
+    #     description='Specifying usb port to connected lidar'
+    # )
 
     # Declare the path to files
     robot_description_xacro_file = os.path.join(
@@ -64,7 +64,7 @@ def generate_launch_description():
     rviz_config_file_dir = os.path.join(
         package_dir, 
         'config', 
-        'minibot_config.rviz'
+        'halfonso_config.rviz'
     )
 
     robot_controllers_file_dir = os.path.join(
@@ -104,11 +104,11 @@ def generate_launch_description():
     )
  
     # Image Transport Republishers Node
-    camera = 'image_raw'
-    depth_camera = 'depth/image_raw'
-    image_transports = ['compressed','compressedDepth', 'theora', 'zstd' ]  
-    node_image_republishers = [image_transport_republisher(transport, depth_camera) 
-                          for transport in image_transports]
+    # camera = 'image_raw'
+    # depth_camera = 'depth/image_raw'
+    # image_transports = ['compressed','compressedDepth', 'theora', 'zstd' ]  
+    # node_image_republishers = [image_transport_republisher(transport, depth_camera) 
+    #                       for transport in image_transports]
  
     # controller spawn
     node_ros2_control = Node(
@@ -181,17 +181,17 @@ def generate_launch_description():
         )
     )
 
-    node_rplidar_drive = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory('sllidar_ros2'),
-                    'launch',
-                    'sllidar_c1_launch.py'
-                )]), 
-                launch_arguments={
-                    'serial_port': lidar_serial_port, 
-                    'frame_id': 'lidar_frame'
-                    }.items()
-    )
+    # node_rplidar_drive = IncludeLaunchDescription(
+    #             PythonLaunchDescriptionSource([os.path.join(
+    #                 get_package_share_directory('sllidar_ros2'),
+    #                 'launch',
+    #                 'sllidar_c1_launch.py'
+    #             )]), 
+    #             launch_arguments={
+    #                 'serial_port': lidar_serial_port, 
+    #                 'frame_id': 'lidar_frame'
+    #                 }.items()
+    # )
 
     # Create the launch description and populate
     ld = LaunchDescription()
@@ -199,7 +199,7 @@ def generate_launch_description():
     # Add the nodes to the launch description
     ld.add_action(declare_use_sim_time)
     ld.add_action(declare_use_ros2_control)
-    ld.add_action(declare_lidar_serial_port)
+    # ld.add_action(declare_lidar_serial_port)
 
     ld.add_action(register_node_ros2_control)
     ld.add_action(register_joint_state_broadcaster_spawner)
@@ -208,9 +208,9 @@ def generate_launch_description():
     ld.add_action(node_robot_state_publisher)
     ld.add_action(node_twist_mux)
     ld.add_action(node_twist_stamper)
-    for node_republisher in node_image_republishers:
-        ld.add_action(node_republisher)
-    ld.add_action(node_rplidar_drive)
+    # for node_republisher in node_image_republishers:
+    #     ld.add_action(node_republisher)
+    # ld.add_action(node_rplidar_drive)
 
     # Generate the launch description  
     return ld

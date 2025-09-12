@@ -5,7 +5,7 @@ from launch_ros.actions import Node
 
 def generate_launch_description():
 
-    package_name= 'minibot'
+    package_name= 'halfonso'
 
     # Declare the path to files
     joy_params_file = os.path.join(

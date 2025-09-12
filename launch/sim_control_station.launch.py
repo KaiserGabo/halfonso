@@ -9,7 +9,7 @@ from launch.conditions import IfCondition
 
 def generate_launch_description():
 
-    package_name= 'minibot'
+    package_name= 'halfonso'
     package_dir= get_package_share_directory(package_name) 
 
     use_sim_time = LaunchConfiguration('use_sim_time')
@@ -24,7 +24,7 @@ def generate_launch_description():
 
     declare_map= DeclareLaunchArgument(
         'map',
-        default_value='./src/minibot/maps/sample_map.yaml',
+        default_value='./src/halfonso/maps/sample_map.yaml',
         description='If true, use simulated clock'
     )
 

@@ -29,7 +29,7 @@ def image_transport_republisher(transport, camera_topics):
 
 def generate_launch_description():
 
-    package_name= 'minibot'
+    package_name= 'halfonso'
     package_dir= get_package_share_directory(package_name) 
 
     # Add launch configurations
@@ -176,7 +176,7 @@ def generate_launch_description():
         executable='create',
         output='screen',
         arguments=['-topic', 'robot_description', 
-                '-name', 'minibot',
+                '-name', 'halfonso',
                 '-allow_renaming', 'true',
                 '-z', '0.1'],
     )
