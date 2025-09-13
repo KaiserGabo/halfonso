@@ -198,7 +198,7 @@ If the Raspberry Pi can't identify a PD chip, it asumes that your power supply i
     
 <br>
 
-## Installing Packages for Raspberry Pi and Flashing Code to ESP32
+## Installing Packages for Raspberry Pi and Flashing Code to Arduino Nano
 
 <ins>**Creating a Workspace `robot_ws` in Your SBC (Raspberry Pi)**</ins>
 
