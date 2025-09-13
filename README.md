@@ -67,7 +67,6 @@ Before we start, see [ROS 2 Packages: A Brief Introduction](https://https://gith
 
 2.  Follow to the insturction at [**Install ROS 2 Packages**](https://https://github.com/KaiserGabo/halfonso/blob/main/Package_Installation_Instruction.md#install-ros-2-package) to install all the necessary packages. \* Although only the listed items under **<ins>For simulation only</ins>** are required for simulation, and the simulation itself is not working properly, it is recommended to install all of them.
 
-
 <br>
 
 ## Launch Simulation
@@ -79,14 +78,13 @@ Before we start, see [ROS 2 Packages: A Brief Introduction](https://https://gith
 
     - When a new terminal is opened, ensure that terminal sourced the workspace also:
 
-2.  Launch the simulation*:
+2.  Launch the simulation\*:
 
         ros2 launch halfonso sim.launch.py
 
     - This will launch the `robot description`, `gazebo`, `rviz2`, `ros2_control` etc.
 
-
- *The URDF file for this robot is not working properly for simulation purposes. Treads are not properly design so the don't move with the motor gears, and since the motor gears are not touching the ground movement is basically impossible. Until I'm able to rebuild the URDF with proper caterpillar treads and motor gears with their respective joints I will not focus on the simulation aspect of the robot. If you want to test the robot but can't build it yourself please go to [the original repository](https://github.com/YJ0528/minibot) this project is based on.
+\*The URDF file for this robot is not working properly for simulation purposes. Treads are not properly design so the don't move with the motor gears, and since the motor gears are not touching the ground movement is basically impossible. Until I'm able to rebuild the URDF with proper caterpillar treads and motor gears with their respective joints I will not focus on the simulation aspect of the robot. If you want to test the robot but can't build it yourself please go to [the original repository](https://github.com/YJ0528/minibot) this project is based on.
 
 <!-- 3.  Launch Simulation Control and SLAM
 
@@ -141,19 +139,17 @@ Refer to:
 - 5cm x 7cm pref board
 - Female pin headers
 - L298N motor driver
-- 3S lipo battery*
-- Step down converter ([5A DC-DC Adjustable Buck Converter](https://www.amazon.com/Adjustable-Converter-1-25-36v-Efficiency-Regulator/dp/B079N9BFZC) for example)*
-
+- 3S lipo battery\*
+- Step down converter ([5A DC-DC Adjustable Buck Converter](https://www.amazon.com/Adjustable-Converter-1-25-36v-Efficiency-Regulator/dp/B079N9BFZC) for example)\*
 
 This are the main components used for my project. If you want more information, please refer to
- [Build a Mobile Robot with ROS: Bill of Materials](https://articulatedrobotics.xyz/tutorials/mobile-robot/project-overview/#bill-of-materials) by [Articulated Robotics](https://articulatedrobotics.xyz/)
+[Build a Mobile Robot with ROS: Bill of Materials](https://articulatedrobotics.xyz/tutorials/mobile-robot/project-overview/#bill-of-materials) by [Articulated Robotics](https://articulatedrobotics.xyz/)
 
 see also: [Recommanded Components for Wiring and Robot Chasis (Optional)](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#recommanded-components-for-wiring-and-robot-chasis-optional).
 
+\*I recommend getting a high capacity battery (at least 3000mah) since most of the components used here consume a considerable amount of energy.
 
-*I recommend getting a high capacity battery (at least 3000mah) since most of the components used here consume a considerable amount of energy.
-
-*This is an adjustable buck converter, so you have to use a multimeter to adjust the output to 5.1V, and add a USB port to use a cable without botching one. I recommend using the [DROK Buck Converter](https://www.amazon.com/Converter-DROK-Regulator-Inverter-Transformer/dp/B01NALDSJ0?th=1) since it actually has a fixed 5V/5A output and a USB port.
+\*This is an adjustable buck converter, so you have to use a multimeter to adjust the output to 5.1V, and add a USB port to use a cable without botching one. I recommend using the [DROK Buck Converter](https://www.amazon.com/Converter-DROK-Regulator-Inverter-Transformer/dp/B01NALDSJ0?th=1) since it actually has a fixed 5V/5A output and a USB port.
 
 <br>
 
@@ -178,24 +174,24 @@ If the Raspberry Pi can't identify a PD chip, it asumes that your power supply i
 
 **Increase the total USB current**
 
-1. Open a terminal and type this command:
+1.  Open a terminal and type this command:
 
         sudo nano /boot/firmware/config.txt
 
-2. Add the following line to the file:
+2.  Add the following line to the file:
 
         usb_max_current_enable=1
 
 **Force the Raspberry Pi 5 to think it is using a 5A power supply**
 
-1. Open Terminal and type: 
+1.  Open Terminal and type:
 
         sudo -E rpi-eeprom-config --edit
 
-2. Add this to the file (allowable options at 3000 or 5000):
+2.  Add this to the file (allowable options at 3000 or 5000):
 
-        PSU_MAX_CURRENT=5000 
-    
+        PSU_MAX_CURRENT=5000
+
 <br>
 
 ## Installing Packages for Raspberry Pi and Flashing Code to Arduino Nano
@@ -224,7 +220,13 @@ In addition, you need to Flash the driver code to your Arduino Nano, see [Instal
     - `/dev/ttyUSB1` for the Arduino Nano; located at [`./src/halfonso/description/ros2_control.xacro/RobotSystem/device`](https://github.com/KaiserGabo/halfonso/blob/main/description/ros2_control.xacro#L11).
     - To check or troubleshoot the USB connection in Raspberry Pi, see [RPI5: Add USB Access for Raspberry Pi](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#rpi5-add-usb-access-for-raspberry-pi).
 
-2.  Connects to the Raspberry Pi from your server machine using `openssh-server`. Open a terminal in the server machine, enter:
+    - I do recommend matching the device ports either `by-id` (the individual ID of the device itself) or `by-path` (the actual USB port the device is connected to). To get this values, open terminal and type:
+
+            ls /dev/serial/by-id*
+            #or
+            ls /dev/serial/by-path*
+
+2.  Connect to the Raspberry Pi from your server machine using `openssh-server`. Open a terminal in the server machine, enter:
 
         ssh <remote_username>@<remote_ip_address>
 
@@ -254,54 +256,55 @@ In addition, you need to Flash the driver code to your Arduino Nano, see [Instal
 
     - This will launch `robot description`,`ros2_control`, etc.
 
-6. Launch the LiDAR scaning
+6.  Launch the LiDAR scaning
 
         ros2 launch ydlidar_ros2_driver ydlidar_launch.py
 
-6.  Launch Robot Control with SLAM or Localization
+7.  Launching SLAM algorithm
 
-    The `robot_remote_station.launch.py` will launch all control features for the robot, inclduing `teleop`, `slam_toolbox`, `nav2 stack`.
+        ros2 launch slam_gmapping slam_gmappin.launch.py
 
-    - To run the control with `online_async_slam` from `slam_toolbox`, open a new terminal in your server machine, source the local workspace and enter:
+    - This will launch the `slam_gmapping` algorithm with RVIZ, however you can also use `slam_toolbox` as an alternative with this command:
 
-          ros2 launch minibot robot_remote_station.launch.py use_slam_option:=online_async_slam
+      ros2 launch slam_toolbox online_async_launch.py
 
-    - For `mapper_params_localization` from `slam_toolbox`:
+8.  Launch the Autonomous Exploration
 
-          ros2 launch minibot robot_remote_station.launch.py use_slam_option:=mapper_params_localization
+    - First you must launch de `nav2` stack for navigation
 
-      - To change the map to load, open the params file at [`./src/minibot/config/mapper_params_localization.yaml`](https://github.com/YJ0528/minibot/blob/aa18371856751b270af9280b53b87c7f5f3a6bcf/config/mapper_params_localization.yaml#L18), replace the value in `map_file_name` with the desired directory.
+      ros2 launch nav2_bringup navigation_launch.py use_sim_time:=False
 
-    - For `AMCL` from `nav2`:
+    - After that, you can launch the `explorer` node for autonomous exploration
 
-          ros2 launch minibot robot_remote_station.launch.py use_slam_option:=amcl map:=./src/minibot/maps/sample_map.yaml
+      ros2 run custom_explorer explorer
 
-      - To change the map to load, replace the default value of [`map`](https://github.com/YJ0528/minibot/blob/aa18371856751b270af9280b53b87c7f5f3a6bcf/launch/robot_remote_station.launch.py#L27) with the desired directory.
+9.  Alternatively, we can just run the teleoperation only using:
 
-7.  Alternatively, we can just run the teleoperation only using:
-
-        ros2 launch minibot joystick_teleop.launch.py
+        ros2 launch halfonso joystick_teleop.launch.py
 
 <br>
 
 ## Demo:
 
-Some visual demostration:
+<!-- Some visual demostration:
 
 <div align="center">
 	<h3> SLAM with Joystick Teleoperation (5x speed with defualt parameter) </h3>
 	<img src="https://github.com/KaiserGabo/halfonso/blob/main/visual_demos/SLAM_demostration-ezgif.com-video-to-gif-converter.gif" height="400">
-	<br><br>	
+	<br><br>
  	<h3> Nav2 Navigation using SLAM Toolbox Localization (5x speed)</h3>
-	<img src="https://github.com/KaiserGabo/halfonso/blob/main/visual_demos/Nav2_demostration-ezgif.com-video-to-gif-converter.gif" height="400">	
+	<img src="https://github.com/KaiserGabo/halfonso/blob/main/visual_demos/Nav2_demostration-ezgif.com-video-to-gif-converter.gif" height="400">
 </div>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`global_costmap/global_costmap/ros__parameters/inflation_layer/cost_scaling_factor`= 1.0
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`global_costmap/global_costmap/ros__parameters/inflation_layer/inflation_radius`= 0.05
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`global_costmap/global_costmap/ros__parameters/inflation_layer/inflation_radius`= 0.05 -->
 
-## TO DO (maybe):
+## TO DO (maybe, perhaps, more probable than not):
 
-- Implement the hardware interface within this package instead.
-- Explore the `slam_toolbox` and `nav2`, or any equivalent.
-- Implement 3D slam at least in simulation using depth camera, if possible.
+- Improve the odometry of the robot (is not that precise for mapping).
+- Integrate a GPS module and display the coordinates on RVIZ.
+- Design a custom PCB for power delivery and one that combines the micro controller and the motor driver.
+- Improve the autonomous exploration algorithm.
+- Make a proper URDF for the treads so I can simulate this thing (if someone else can do it I will appreciate it for life).
+- Desinging a better enclosure so no component is exposed.
