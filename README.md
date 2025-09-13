@@ -26,6 +26,7 @@ Hi everyone! Today I would like to share my project implementing a fundamental d
 This project also represents my learning journey following tutorials from [Articulated Robotics](https://articulatedrobotics.xyz/):
 
 - Forum: https://articulatedrobotics.xyz/tutorials/mobile-robot/project-overview/
+- Forum beta (has update instructions for more recent versions of ROS 2 (Humble, Jazzy, etc)): https://beta.articulatedrobotics.xyz/tutorials/mobile-robot/project-overview/
 - Tutorial playlist: https://youtube.com/playlist?list=PLunhqkrRNRhYAffV8JDiFOatQXuU-NnxT&si=1N9GNN6gRnet5heK
 
 You can see the demo [here](https://github.com/KaiserGabo/halfonso/blob/main/README.md#demo)
@@ -48,7 +49,7 @@ Make sure VScode is installed, it can be found in Ubuntu App Center. Some extens
 - YAML (Red Hat)
 - Remote - SSH (Microsoft)
 
-Additionally, consider to install [Terminator](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#terminator), which is a useful tool to use with ROS 2.
+Additionally, consider to install [tmux](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#terminator), which is a useful tool to use with ROS 2.
 
 <br>
 
@@ -64,7 +65,8 @@ Before we start, see [ROS 2 Packages: A Brief Introduction](https://https://gith
 
     - Replace `ros_ws` with the name you want to put as your workspace name.
 
-2.  Follow to the insturction at [**Install ROS 2 Packages**](https://https://github.com/KaiserGabo/halfonso/blob/main/Package_Installation_Instruction.md#install-ros-2-package) to install all the necessary packages. \* Although only the listed items under **<ins>For simulation only</ins>** are required for simulation, it is recommanded to install all of them.
+2.  Follow to the insturction at [**Install ROS 2 Packages**](https://https://github.com/KaiserGabo/halfonso/blob/main/Package_Installation_Instruction.md#install-ros-2-package) to install all the necessary packages. \* Although only the listed items under **<ins>For simulation only</ins>** are required for simulation, and the simulation itself is not working properly, it is recommended to install all of them.
+
 
 <br>
 
@@ -77,13 +79,16 @@ Before we start, see [ROS 2 Packages: A Brief Introduction](https://https://gith
 
     - When a new terminal is opened, ensure that terminal sourced the workspace also:
 
-2.  Launch the simulation:
+2.  Launch the simulation*:
 
         ros2 launch halfonso sim.launch.py
 
     - This will launch the `robot description`, `gazebo`, `rviz2`, `ros2_control` etc.
 
-3.  Launch Simulation Control and SLAM
+
+ *The URDF file for this robot is not working properly for simulation purposes. Treads are not properly design so the don't move with the motor gears, and since the motor gears are not touching the ground movement is basically impossible. Until I'm able to rebuild the URDF with proper caterpillar treads and motor gears with their respective joints I will not focus on the simulation aspect of the robot. If you want to test the robot but can't build it yourself please go to [the original repository](https://github.com/YJ0528/minibot) this project is based on.
+
+<!-- 3.  Launch Simulation Control and SLAM
 
     The `sim_control_station.launch.py` will launch all control features for the simulation, inclduing `teleop`, `slam_toolbox`, `nav2 stack`.
 
@@ -105,7 +110,7 @@ Before we start, see [ROS 2 Packages: A Brief Introduction](https://https://gith
 
 4.  Alternatively, we can just run the teleoperation only using:
 
-        ros2 launch minibot joystick_teleop.launch.py
+        ros2 launch minibot joystick_teleop.launch.py -->
 
 ### Additional Notes:
 
@@ -129,16 +134,26 @@ Refer to:
 ## Lisf of Hardwares:
 
 - Raspberry Pi 5
-- RPLIDAR C1
-- ESP32-vroom-32 development board
-- ESP32 expansion board (be award whether the pinout match the ESP32 dev board)
-- Cytron MDD3A motor driver
-- 3S lipo battery
-- Step down converter ([DFRobot DRF0205](https://www.dfrobot.com/product-752.html) for example)
+- YDLiDAR T-Mini Plus
+- Tank chassis ([this is the one I used](https://www.amazon.com/XiaoR-Geek-Aluminum-Raspberry-Absorbing/dp/B09C7TK9Y9?s=industrial))
+- 12V DC motor with encoders ([two of them](https://www.amazon.com/Encoder-Magnetic-Gearbox-Bracket-Reduction/dp/B07X5P1584), buy them just in case your chassis doesn't come with them)
+- Arduino Nano Type C
+- 5cm x 7cm pref board
+- Female pin headers
+- L298N motor driver
+- 3S lipo battery*
+- Step down converter ([5A DC-DC Adjustable Buck Converter](https://www.amazon.com/Adjustable-Converter-1-25-36v-Efficiency-Regulator/dp/B079N9BFZC) for example)*
 
-I only listed down the main electronics that I used, for more information, refer to [Build a Mobile Robot with ROS: Bill of Materials](https://articulatedrobotics.xyz/tutorials/mobile-robot/project-overview/#bill-of-materials) by [Articulated Robotics](https://articulatedrobotics.xyz/)
+
+This are the main components used for my project. If you want more information, please refer to
+ [Build a Mobile Robot with ROS: Bill of Materials](https://articulatedrobotics.xyz/tutorials/mobile-robot/project-overview/#bill-of-materials) by [Articulated Robotics](https://articulatedrobotics.xyz/)
 
 see also: [Recommanded Components for Wiring and Robot Chasis (Optional)](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#recommanded-components-for-wiring-and-robot-chasis-optional).
+
+
+*I recommend getting a high capacity battery (at least 3000mah) since most of the components used here consume a considerable amount of energy.
+
+*This is an adjustable buck converter, so you have to use a multimeter to adjust the output to 5.1V, and add a USB port to use a cable without botching one. I recommend using the [DROK Buck Converter](https://www.amazon.com/Converter-DROK-Regulator-Inverter-Transformer/dp/B01NALDSJ0?th=1) since it actually has a fixed 5V/5A output and a USB port.
 
 <br>
 
@@ -157,6 +172,30 @@ Make sure you are using [Ubuntu 24.04](https://ubuntu.com/tutorials/install-ubun
 - For ROS 2 installation, you can select `ROS-Base Install` instead of `Desktop Install`.
 - If you wish to run `RViz` in Raspberry Pi, consider `Desktop Install` or binary install via bash using `sudo apt install ros-jazzy-rviz2`.
 
+**<ins>Configuring the Raspberry Pi for accepting non-PD power supply</ins>**
+
+If the Raspberry Pi can't identify a PD chip, it asumes that your power supply isn't capable of delivering 5A and restrics the amount of current the USB ports can provide (from 1600mA to 600mA) and underpowers the CPU by only consuming 3A. To fix this, please do the following:
+
+**Increase the total USB current**
+
+1. Open a terminal and type this command:
+
+        sudo nano /boot/firmware/config.txt
+
+2. Add the following line to the file:
+
+        usb_max_current_enable=1
+
+**Force the Raspberry Pi 5 to think it is using a 5A power supply**
+
+1. Open Terminal and type: 
+
+        sudo -E rpi-eeprom-config --edit
+
+2. Add this to the file (allowable options at 3000 or 5000):
+
+        PSU_MAX_CURRENT=5000 
+    
 <br>
 
 ## Installing Packages for Raspberry Pi and Flashing Code to ESP32
@@ -171,9 +210,9 @@ Make sure you are using [Ubuntu 24.04](https://ubuntu.com/tutorials/install-ubun
 
 2.  Follow to the insturction at [**Install ROS 2 Packages**](https://https://github.com/KaiserGabo/halfonso/blob/main/Package_Installation_Instruction.md#install-ros-2-package) to install all the necessary packages in Raspberry Pi. \* You need to install all the packages listed except `ros_gz`.
 
-<ins>**Flashing Code to ESP32**</ins>
+<ins>**Flashing Code to Arduino Nano**</ins>
 
-In addition, you need to Flash the driver code to your ESP32, see [Install and Flash Microcontroller Driver code](https://https://github.com/KaiserGabo/halfonso/blob/main/Package_Installation_Instruction.md#install-and-flash-microcontroller-driver-code)
+In addition, you need to Flash the driver code to your Arduino Nano, see [Install and Flash Microcontroller Driver code](https://https://github.com/KaiserGabo/halfonso/blob/main/Package_Installation_Instruction.md#install-and-flash-microcontroller-driver-code)
 
 <br>
 
@@ -181,8 +220,8 @@ In addition, you need to Flash the driver code to your ESP32, see [Install and F
 
 1.  Ensure the Raspberry Pi USB device port number matched the value declared:
 
-    - `/dev/ttyUSB0` for the lidar serial; located at [`./src/minibot/launch/robot.launch.py/declare_lidar_serial_port`](https://github.com/YJ0528/minibot/blob/aa18371856751b270af9280b53b87c7f5f3a6bcf/launch/robot.launch.py#L53).
-    - `/dev/ttyUSB1` for the ESP32; located at [`./src/minibot/description/ros2_control.xacro/RobotSystem/device`](https://github.com/YJ0528/minibot/blob/aa18371856751b270af9280b53b87c7f5f3a6bcf/description/ros2_control.xacro#L11).
+    - `/dev/ttyUSB0` for the lidar serial; located at [`./src/ydlidar_ros2_driver/params/ydlidar.yaml/ydlidar_ros2_driver_node`](https://github.com/KaiserGabo/ydlidar_ros2_driver/blob/main/params/ydlidar.yaml#L4).
+    - `/dev/ttyUSB1` for the Arduino Nano; located at [`./src/halfonso/description/ros2_control.xacro/RobotSystem/device`](https://github.com/KaiserGabo/halfonso/blob/main/description/ros2_control.xacro#L11).
     - To check or troubleshoot the USB connection in Raspberry Pi, see [RPI5: Add USB Access for Raspberry Pi](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#rpi5-add-usb-access-for-raspberry-pi).
 
 2.  Connects to the Raspberry Pi from your server machine using `openssh-server`. Open a terminal in the server machine, enter:
@@ -194,7 +233,7 @@ In addition, you need to Flash the driver code to your ESP32, see [Install and F
 3.  In order to let the nodes to be discoverable between the server and the remote machine, We need to set `ROS_DOMAIN_ID` to the same for both of the machine:
 
         # The ID is 0 by default, but can be any number between 0 between 101
-        export ROS_DOMAIN_ID=1
+        export ROS_DOMAIN_ID=15000mah
 
     - For the Raspberry Pi, we can add `export ROS_DOMAIN_ID = 1` to the `.bashrc` file instead using:
 
@@ -211,9 +250,13 @@ In addition, you need to Flash the driver code to your ESP32, see [Install and F
 
 5.  Run the robot:
 
-        ros2 launch minibot robot.launch.py
+        ros2 launch halfonso robot.launch.py
 
-    - This will launch `robot description`,`ros2_control`, `sllidar_c1_launch` etc.
+    - This will launch `robot description`,`ros2_control`, etc.
+
+6. Launch the LiDAR scaning
+
+        ros2 launch ydlidar_ros2_driver ydlidar_launch.py
 
 6.  Launch Robot Control with SLAM or Localization
 
