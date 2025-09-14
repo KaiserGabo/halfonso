@@ -73,8 +73,8 @@ Before we start, see [ROS 2 Packages: A Brief Introduction](https://https://gith
 
 1.  Once Everything is set, go to `your_workspace` and source the workspace:
 
-    cd ros_ws/
-    . install/setup.bash
+        cd ros_ws/
+        source install/setup.bash
 
     - When a new terminal is opened, ensure that terminal sourced the workspace also:
 
@@ -216,8 +216,8 @@ In addition, you need to Flash the driver code to your Arduino Nano, see [Instal
 
 1.  Ensure the Raspberry Pi USB device port number matched the value declared:
 
-    - `/dev/ttyUSB0` for the lidar serial; located at [`./src/ydlidar_ros2_driver/params/ydlidar.yaml/ydlidar_ros2_driver_node`](https://github.com/KaiserGabo/ydlidar_ros2_driver/blob/main/params/ydlidar.yaml#L4).
-    - `/dev/ttyUSB1` for the Arduino Nano; located at [`./src/halfonso/description/ros2_control.xacro/RobotSystem/device`](https://github.com/KaiserGabo/halfonso/blob/main/description/ros2_control.xacro#L11).
+    - `/dev/ttyUSB0` for the lidar serial; located at [`./src/ydlidar_ros2_driver/params/ydlidar.yaml/ydlidar_ros2_driver_node`](https://github.com/KaiserGabo/ydlidar_ros2_driver/blob/main/params/ydlidar.yaml#L4)
+    - `/dev/ttyUSB1` for the Arduino Nano; located at [`./src/halfonso/description/ros2_control.xacro/RobotSystem/device`](https://github.com/KaiserGabo/halfonso/blob/main/description/ros2_control.xacro#L11)
     - To check or troubleshoot the USB connection in Raspberry Pi, see [RPI5: Add USB Access for Raspberry Pi](https://github.com/KaiserGabo/halfonso/blob/main/Tips_and_Troubleshooting.md#rpi5-add-usb-access-for-raspberry-pi).
 
     - I do recommend matching the device ports either `by-id` (the individual ID of the device itself) or `by-path` (the actual USB port the device is connected to). To get this values, open terminal and type:
@@ -265,18 +265,18 @@ In addition, you need to Flash the driver code to your Arduino Nano, see [Instal
         ros2 launch slam_gmapping slam_gmappin.launch.py
 
     - This will launch the `slam_gmapping` algorithm with RVIZ, however you can also use `slam_toolbox` as an alternative with this command:
-
-      ros2 launch slam_toolbox online_async_launch.py
+            
+             ros2 launch slam_toolbox online_async_launch.py
 
 8.  Launch the Autonomous Exploration
 
     - First you must launch de `nav2` stack for navigation
 
-      ros2 launch nav2_bringup navigation_launch.py use_sim_time:=False
+        ros2 launch nav2_bringup navigation_launch.py use_sim_time:=False
 
     - After that, you can launch the `explorer` node for autonomous exploration
 
-      ros2 run custom_explorer explorer
+            ros2 run custom_explorer explorer
 
 9.  Alternatively, we can just run the teleoperation only using:
 
